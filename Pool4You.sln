@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pool4You", "Pool4You\Pool4You.csproj", "{2C8AD655-C20C-4C28-B361-A69FEBC858A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pool4You.Data", "Pool4You.Data\Pool4You.Data.csproj", "{714FE96D-4402-410E-A1C6-30AF9A4C5888}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pool4You.Logic", "Pool4You.Logic\Pool4You.Logic.csproj", "{EF660CCA-69F3-4010-8202-D0D21095DE94}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2C8AD655-C20C-4C28-B361-A69FEBC858A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C8AD655-C20C-4C28-B361-A69FEBC858A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C8AD655-C20C-4C28-B361-A69FEBC858A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C8AD655-C20C-4C28-B361-A69FEBC858A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{714FE96D-4402-410E-A1C6-30AF9A4C5888}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{714FE96D-4402-410E-A1C6-30AF9A4C5888}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{714FE96D-4402-410E-A1C6-30AF9A4C5888}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{714FE96D-4402-410E-A1C6-30AF9A4C5888}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF660CCA-69F3-4010-8202-D0D21095DE94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF660CCA-69F3-4010-8202-D0D21095DE94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF660CCA-69F3-4010-8202-D0D21095DE94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF660CCA-69F3-4010-8202-D0D21095DE94}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

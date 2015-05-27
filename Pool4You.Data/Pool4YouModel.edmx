@@ -1,0 +1,399 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Antwort">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Antowrttext" Type="text" />
+          <Property Name="Kommentar" Type="text" />
+          <Property Name="FrageId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Frage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fragetext" Type="text" />
+          <Property Name="Fragetyp" Type="nchar" MaxLength="30" />
+          <Property Name="UmfrageId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Umfrage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nchar" MaxLength="100" />
+          <Property Name="Beschreibung" Type="ntext" />
+          <Property Name="Start-Termin" Type="date" />
+          <Property Name="End-Termin" Type="date" />
+          <Property Name="AspNetUsersId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Votum">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Uhrzeit" Type="time" Precision="7" />
+          <Property Name="Datum" Type="date" />
+          <Property Name="AntwortId" Type="int" Nullable="false" />
+          <Property Name="AspNetUsersId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Antwort_Frage">
+          <End Role="Frage" Type="Self.Frage" Multiplicity="1" />
+          <End Role="Antwort" Type="Self.Antwort" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Frage">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Antwort">
+              <PropertyRef Name="FrageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Frage_ToTable">
+          <End Role="Umfrage" Type="Self.Umfrage" Multiplicity="1" />
+          <End Role="Frage" Type="Self.Frage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Umfrage">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Frage">
+              <PropertyRef Name="UmfrageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Umfrage_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Umfrage" Type="Self.Umfrage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Umfrage">
+              <PropertyRef Name="AspNetUsersId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Votum_Antwort">
+          <End Role="Antwort" Type="Self.Antwort" Multiplicity="1" />
+          <End Role="Votum" Type="Self.Votum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Antwort">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Votum">
+              <PropertyRef Name="AntwortId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Votum_AspNetUser">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Votum" Type="Self.Votum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Votum">
+              <PropertyRef Name="AspNetUsersId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="Antwort" EntityType="Self.Antwort" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Frage" EntityType="Self.Frage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Umfrage" EntityType="Self.Umfrage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Votum" EntityType="Self.Votum" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Antwort_Frage" Association="Self.FK_Antwort_Frage">
+            <End Role="Frage" EntitySet="Frage" />
+            <End Role="Antwort" EntitySet="Antwort" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Frage_ToTable" Association="Self.FK_Frage_ToTable">
+            <End Role="Umfrage" EntitySet="Umfrage" />
+            <End Role="Frage" EntitySet="Frage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Umfrage_AspNetUsers" Association="Self.FK_Umfrage_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Umfrage" EntitySet="Umfrage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Votum_Antwort" Association="Self.FK_Votum_Antwort">
+            <End Role="Antwort" EntitySet="Antwort" />
+            <End Role="Votum" EntitySet="Votum" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Votum_AspNetUser" Association="Self.FK_Votum_AspNetUser">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Votum" EntitySet="Votum" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Antwort">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Antowrttext" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Kommentar" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FrageId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Frage" Relationship="Self.FK_Antwort_Frage" FromRole="Antwort" ToRole="Frage" />
+          <NavigationProperty Name="Votum" Relationship="Self.FK_Votum_Antwort" FromRole="Antwort" ToRole="Votum" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Umfrage" Relationship="Self.FK_Umfrage_AspNetUsers" FromRole="AspNetUsers" ToRole="Umfrage" />
+          <NavigationProperty Name="Votum" Relationship="Self.FK_Votum_AspNetUser" FromRole="AspNetUsers" ToRole="Votum" />
+        </EntityType>
+        <EntityType Name="Frage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fragetext" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Fragetyp" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="UmfrageId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Antwort" Relationship="Self.FK_Antwort_Frage" FromRole="Frage" ToRole="Antwort" />
+          <NavigationProperty Name="Umfrage" Relationship="Self.FK_Frage_ToTable" FromRole="Frage" ToRole="Umfrage" />
+        </EntityType>
+        <EntityType Name="Umfrage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Beschreibung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Start_Termin" Type="DateTime" Precision="0" />
+          <Property Name="End_Termin" Type="DateTime" Precision="0" />
+          <Property Name="AspNetUsersId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_Umfrage_AspNetUsers" FromRole="Umfrage" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Frage" Relationship="Self.FK_Frage_ToTable" FromRole="Umfrage" ToRole="Frage" />
+        </EntityType>
+        <EntityType Name="Votum">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Uhrzeit" Type="Time" Precision="7" />
+          <Property Name="Datum" Type="DateTime" Precision="0" />
+          <Property Name="AntwortId" Type="Int32" Nullable="false" />
+          <Property Name="AspNetUsersId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Antwort" Relationship="Self.FK_Votum_Antwort" FromRole="Votum" ToRole="Antwort" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_Votum_AspNetUser" FromRole="Votum" ToRole="AspNetUsers" />
+        </EntityType>
+        <Association Name="FK_Antwort_Frage">
+          <End Role="Frage" Type="Self.Frage" Multiplicity="1" />
+          <End Role="Antwort" Type="Self.Antwort" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Frage">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Antwort">
+              <PropertyRef Name="FrageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Votum_Antwort">
+          <End Role="Antwort" Type="Self.Antwort" Multiplicity="1" />
+          <End Role="Votum" Type="Self.Votum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Antwort">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Votum">
+              <PropertyRef Name="AntwortId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Umfrage_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Umfrage" Type="Self.Umfrage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Umfrage">
+              <PropertyRef Name="AspNetUsersId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Votum_AspNetUser">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Votum" Type="Self.Votum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Votum">
+              <PropertyRef Name="AspNetUsersId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Frage_ToTable">
+          <End Role="Umfrage" Type="Self.Umfrage" Multiplicity="1" />
+          <End Role="Frage" Type="Self.Frage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Umfrage">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Frage">
+              <PropertyRef Name="UmfrageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Antwort" EntityType="Self.Antwort" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
+          <EntitySet Name="Frage" EntityType="Self.Frage" />
+          <EntitySet Name="Umfrage" EntityType="Self.Umfrage" />
+          <EntitySet Name="Votum" EntityType="Self.Votum" />
+          <AssociationSet Name="FK_Antwort_Frage" Association="Self.FK_Antwort_Frage">
+            <End Role="Frage" EntitySet="Frage" />
+            <End Role="Antwort" EntitySet="Antwort" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Votum_Antwort" Association="Self.FK_Votum_Antwort">
+            <End Role="Antwort" EntitySet="Antwort" />
+            <End Role="Votum" EntitySet="Votum" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Umfrage_AspNetUsers" Association="Self.FK_Umfrage_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Umfrage" EntitySet="Umfrage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Votum_AspNetUser" Association="Self.FK_Votum_AspNetUser">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Votum" EntitySet="Votum" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Frage_ToTable" Association="Self.FK_Frage_ToTable">
+            <End Role="Umfrage" EntitySet="Umfrage" />
+            <End Role="Frage" EntitySet="Frage" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Antwort">
+            <EntityTypeMapping TypeName="Model.Antwort">
+              <MappingFragment StoreEntitySet="Antwort">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Antowrttext" ColumnName="Antowrttext" />
+                <ScalarProperty Name="Kommentar" ColumnName="Kommentar" />
+                <ScalarProperty Name="FrageId" ColumnName="FrageId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="Model.AspNetUsers">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Frage">
+            <EntityTypeMapping TypeName="Model.Frage">
+              <MappingFragment StoreEntitySet="Frage">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Fragetext" ColumnName="Fragetext" />
+                <ScalarProperty Name="Fragetyp" ColumnName="Fragetyp" />
+                <ScalarProperty Name="UmfrageId" ColumnName="UmfrageId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Umfrage">
+            <EntityTypeMapping TypeName="Model.Umfrage">
+              <MappingFragment StoreEntitySet="Umfrage">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Beschreibung" ColumnName="Beschreibung" />
+                <ScalarProperty Name="Start_Termin" ColumnName="Start-Termin" />
+                <ScalarProperty Name="End_Termin" ColumnName="End-Termin" />
+                <ScalarProperty Name="AspNetUsersId" ColumnName="AspNetUsersId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Votum">
+            <EntityTypeMapping TypeName="Model.Votum">
+              <MappingFragment StoreEntitySet="Votum">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Uhrzeit" ColumnName="Uhrzeit" />
+                <ScalarProperty Name="Datum" ColumnName="Datum" />
+                <ScalarProperty Name="AntwortId" ColumnName="AntwortId" />
+                <ScalarProperty Name="AspNetUsersId" ColumnName="AspNetUsersId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
