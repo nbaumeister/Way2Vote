@@ -258,7 +258,11 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\ZugaenglicheUmfragenAuswaehlen\index.cshtml" />
+    <Content Include="Views\ZugaenglicheUmfragenAuswaehlen\Index.cshtml" />
+    <Content Include="Views\ZugaenglicheUmfragenAuswaehlen\Teilnehmen.cshtml" />
+    <Content Include="Views\ZugaenglicheUmfragenAuswaehlen\View.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Votum.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Antwort.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

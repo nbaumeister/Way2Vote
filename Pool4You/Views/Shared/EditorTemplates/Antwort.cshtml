@@ -1,0 +1,10 @@
+﻿@model Pool4You.Data.Antwort
+Antwort
+<ul>
+    @foreach (var option in Model.Frage.Antwort)
+    {
+        <li>
+            @Html.RadioButtonFor(model => model, option.Id) @(option.Antowrttext)
+        </li>
+    }
+</ul>
