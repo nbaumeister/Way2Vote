@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using Microsoft.AspNet.Identity;
+using Pool4You.Models;
 
 namespace Pool4You.Controllers
 {
@@ -19,7 +20,9 @@ namespace Pool4You.Controllers
             Entities context = new Entities();
             umfrageLogic = new UmfragenLogic(context);
         }
+
         // GET: ZugaenglicheUmfragenAuswaehlen
+        [Authorize]
         public ActionResult Index()
         {
             string userId = User.Identity.GetUserId();
@@ -30,24 +33,27 @@ namespace Pool4You.Controllers
         }
 
         // GET: Teilnehmen
+        [Authorize]
         public ActionResult Teilnehmen(int id)
         {
             string userId = User.Identity.GetUserId();
 
-            var model = umfrageLogic.VotumVeraendern(userId, id);
+            var model = new UmfrageBearbeitenViewModel();
+            model.Vota = umfrageLogic.VotumVeraendern(userId, id);
 
             return View(model);
         }
 
         // Post: Teilnehmen
         [HttpPost]
-        public ActionResult Teilnehmen(int id, FormCollection form)
+        [Authorize]
+        public ActionResult Teilnehmen(int id, UmfrageBearbeitenViewModel vmodel)
         {
             string userId = User.Identity.GetUserId();
 
-            var model = umfrageLogic.VotumVeraendern(userId, id);
+            umfrageLogic.VotumVeraendern(userId, id, vmodel.Vota);
 
-            return View(model);
+            return RedirectToAction("Index");
         }
     }
 }

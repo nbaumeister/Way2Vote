@@ -183,6 +183,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\UmfrageBearbeitenViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -262,7 +263,6 @@
     <Content Include="Views\ZugaenglicheUmfragenAuswaehlen\Teilnehmen.cshtml" />
     <Content Include="Views\ZugaenglicheUmfragenAuswaehlen\View.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Votum.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\Antwort.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

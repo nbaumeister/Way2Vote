@@ -1,0 +1,12 @@
+﻿@model Pool4You.Data.Votum
+<h3>@(Model.Antwort.Frage.Fragetext)</h3>
+
+@Html.HiddenFor(v => v.Id)
+<ul>
+    @foreach (var option in Model.Antwort.Frage.Antwort.OrderBy(x => x.Id))
+    {
+        <li>
+            @Html.RadioButtonFor(v => v.AntwortId, option.Id, option.Id == Model.AntwortId ? new {Checked = "checked"}:null) <b>@(option.Antowrttext)</b> @(option.Kommentar)
+        </li>
+    }
+</ul>
