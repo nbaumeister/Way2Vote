@@ -1,0 +1,23 @@
+﻿@model Pool4You.Models.UmfrageBearbeitenViewModel
+
+@{
+    ViewBag.Title = "Teilnehmen";
+}
+
+<h1>Teilnehmen</h1>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+
+    @Html.EditorFor(m => m.Vota);
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </div>
+}
+
