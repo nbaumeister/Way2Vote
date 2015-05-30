@@ -63,8 +63,6 @@ namespace Pool4You.Logic
         {
             if (UserId != null && vota != null)
             {
-                Umfrage umfrage = UmfrageRepo.GetByID(UmfrageId);
-
                 foreach (var votum in vota)
                 {
                     if (votum.Id == 0)
