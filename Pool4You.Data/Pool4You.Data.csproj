@@ -103,6 +103,7 @@
     <Compile Include="Frage.cs">
       <DependentUpon>Pool4YouModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Metadata.cs" />
     <Compile Include="Pool4YouModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

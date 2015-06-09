@@ -11,7 +11,9 @@ namespace Pool4You.Data
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
+    [MetadataType(typeof(UmfrageMetadata))]
     public partial class Umfrage
     {
         public Umfrage()
