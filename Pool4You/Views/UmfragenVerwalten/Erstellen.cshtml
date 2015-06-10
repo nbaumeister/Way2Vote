@@ -1,0 +1,176 @@
+﻿@model Pool4You.Data.Umfrage
+
+@{
+    ViewBag.Title = "View";
+}
+
+<h2>View</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        
+    
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Beschreibung, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Beschreibung, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Beschreibung, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Start_Termin, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Start_Termin, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Start_Termin, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.End_Termin, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.End_Termin, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.End_Termin, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    
+        <ul>
+            @Html.EditorFor(m => m.Frage)
+        </ul>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    
+
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+<script type="text/javascript">
+
+    $(function () {
+        registerEvents($(document));
+    });
+    function registerEvents(el) {
+        el.find(".add").click(add)
+        el.find(".remove").click(remove)
+    }
+
+    function add(event) {
+        var level = getLevel(this);
+        var template = getTemplate(this);
+        registerEvents(template);
+        $(this).closest("ul").append(template);
+        reorder($(this).closest("ul"), level);
+    }
+
+    function remove(event) {
+        $this = $(this);
+        var level = getLevel(this);
+        var ul = $(this).closest("ul")
+        if (ul.find("> li").length > 1) {
+            $this.closest("li").remove();
+            reorder(ul, level);
+        }
+    }
+
+    function getLevel(source) {
+        var idName = $(source).closest("li").find(".id").attr("name");
+
+        if (idName && idName != "") {
+            var level = ((idName.split("[")).length)-1;
+            return level;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    function getTemplate(source){
+        var ul = $(source).closest("li").closest("ul").clone();;
+        if(ul && ul.length != 0){
+            return getFirstLi(ul);
+        }
+        else{
+            return null;
+        }
+    }
+    function getFirstLi(ul) {
+        var li = ul.find("li");
+
+        if(li && li.length != 0){
+            var firstLi = $(li[0]);
+            var uls = firstLi.find("ul");
+
+            uls.each(function(){
+                $this = $(this);
+                var firstLi = getFirstLi($this);
+                $this.empty();
+                if(firstLi){
+                    $this.append(firstLi);
+                }
+            });
+
+            firstLi.find("input").val('');
+
+            return firstLi;
+        }
+        else
+        {
+            return null;
+        }
+
+    }
+    
+    function reorder(element, level) {
+        $element = element;
+        $element.find("> li").each(function (index) {
+            reorderElement($(this), level, index);
+        });
+
+    }
+
+    function reorderElement(element, level, newOrder) {
+        element.find("input").each(function () {
+            $this = $(this);
+            var name = $this.attr("name");
+            var levels = name.split("[");
+
+            if (levels.length > level) {
+                levels[level] = replaceNumber(levels[level], newOrder);
+            }
+
+            name = levels.join("[");
+            $this.attr("name", name);
+        })
+    }
+
+    function replaceNumber(string, newOrder) {
+        var split = string.split("]");
+        split[0] = newOrder;
+        return split.join("]");
+    }
+</script>
+
+}

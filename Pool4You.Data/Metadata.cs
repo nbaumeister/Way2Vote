@@ -17,9 +17,11 @@ namespace Pool4You.Data
         [Display(Name = "Beschreibung")]
         public string Beschreibung;
 
+        [DataType(DataType.Date)]
         [Display(Name = "Starttermin")]
         public Nullable<System.DateTime> Start_Termin;
 
+        [DataType(DataType.Date)]
         [Display(Name = "Endtermin")]
         public Nullable<System.DateTime> End_Termin;
 

@@ -176,6 +176,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\UmfragenVerwaltenController.cs" />
     <Compile Include="Controllers\ZugaenglicheUmfragenAuswaehlenController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -262,6 +263,9 @@
     <Content Include="Views\ZugaenglicheUmfragenAuswaehlen\Index.cshtml" />
     <Content Include="Views\ZugaenglicheUmfragenAuswaehlen\Teilnehmen.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Votum.cshtml" />
+    <Content Include="Views\UmfragenVerwalten\Erstellen.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Frage.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Antwort.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

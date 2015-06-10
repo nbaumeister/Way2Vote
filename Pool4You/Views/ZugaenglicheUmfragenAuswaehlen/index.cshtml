@@ -48,6 +48,7 @@
         </td>
         <td>
             @Html.ActionLink("Teilnehmen", "Teilnehmen", new { id = item.Id })
+            @Html.ActionLink("Löschen", "Loeschen", "UmfragenVerwalten", new { id = item.Id }, null)
         </td>
     </tr>
 }
