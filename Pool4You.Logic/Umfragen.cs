@@ -11,13 +11,10 @@ namespace Pool4You.Logic
     {
         Entities _context;
 
-        public const string _FRAGETYP = "einfach";
-
         public static GenericRepository<Umfrage> UmfrageRepo;
         public static GenericRepository<Votum> VotumRepo;
         public static GenericRepository<AspNetUsers> UserRepo;
         public static GenericRepository<Antwort> AntwortRepo;
-        public static GenericRepository<Frage> FrageRepo;
 
         public UmfragenLogic(Entities context)
         {
@@ -27,7 +24,6 @@ namespace Pool4You.Logic
             VotumRepo = new GenericRepository<Votum>(context);
             UserRepo = new GenericRepository<AspNetUsers>(context);
             AntwortRepo = new GenericRepository<Antwort>(context);
-            FrageRepo = new GenericRepository<Frage>(context);
         }
 
         public List<Umfrage> ZugaenglicheUmfragenAuswaehlen(string UserId)
@@ -67,11 +63,13 @@ namespace Pool4You.Logic
         {
             if (UserId != null && vota != null)
             {
+                Umfrage umfrage = UmfrageRepo.GetByID(UmfrageId);
+
                 foreach (var votum in vota)
                 {
                     if (votum.Id == 0)
                     {
-                        VotumValuesSetzen(UserId, votum, votum.AntwortId);
+                        SetVotumValues(UserId, votum, votum.AntwortId);
 
                         VotumRepo.Insert(votum);
                     }
@@ -79,7 +77,7 @@ namespace Pool4You.Logic
                     {
                         var existingVotum = VotumRepo.GetByID(votum.Id);
 
-                        VotumValuesSetzen(UserId, existingVotum, votum.AntwortId);
+                        SetVotumValues(UserId, existingVotum, votum.AntwortId);
 
                         VotumRepo.Update(existingVotum);
                     }
@@ -95,7 +93,7 @@ namespace Pool4You.Logic
             }
         }
 
-        private static void VotumValuesSetzen(string UserId, Votum Votum, int AntwortId)
+        private static void SetVotumValues(string UserId, Votum Votum, int AntwortId)
         {
             Votum.AspNetUsersId = UserId;
             Votum.AspNetUsers = UserRepo.GetByID(UserId);
@@ -105,73 +103,6 @@ namespace Pool4You.Logic
             
             Votum.Datum = DateTime.Now; 
             Votum.Uhrzeit = DateTime.Now.TimeOfDay;
-        }
-
-        public Umfrage UmfrageErstellen()
-        {
-            var u = new Umfrage();
-            u.Frage = new List<Frage>();
-
-            var f = new Frage();
-            f.Antwort = new List<Antwort>();
-            f.Antwort.Add(new Antwort());
-
-            u.Frage.Add(f);
-
-            return u;
-        }
-
-        public void UmfrageErstellen(Umfrage Umfrage, string UserId)
-        {
-            if (UserId != null && Umfrage != null)
-            {
-                Umfrage.AspNetUsersId = UserId;
-
-                UmfrageRepo.Insert(Umfrage);
-
-                foreach (var frage in Umfrage.Frage)
-                {
-                    frage.Fragetyp = _FRAGETYP;
-
-                    FrageRepo.Insert(frage);
-
-                    foreach (var antwort in frage.Antwort)
-                    {
-                        AntwortRepo.Insert(antwort);
-                    }
-                }
-
-                _context.SaveChanges();
-            }
-        }
-
-        public void UmfrageLoeschen(int UmfrageId)
-        {
-            Umfrage umfrage = UmfrageRepo.GetByID(UmfrageId);
-
-            if (umfrage != null)
-            {
-                int fragenLength = umfrage.Frage.Count;
-                for(int i = 0; i < fragenLength; i++)
-                {
-                    int antwortLength = umfrage.Frage.ElementAt(i).Antwort.Count;
-                    for (int y = 0; y < antwortLength; y++ )
-                    {
-                        AntwortRepo.Delete(umfrage.Frage.ElementAt(i).Antwort.ElementAt(y));
-                    }
-                }
-                _context.SaveChanges();
-
-                for (int i = 0; i < fragenLength; i++)
-                {
-                    FrageRepo.Delete(umfrage.Frage.ElementAt(i));
-                }
-                _context.SaveChanges();
-
-                UmfrageRepo.Delete(umfrage);
-                _context.SaveChanges();
-            }
-            
         }
     }
 }
