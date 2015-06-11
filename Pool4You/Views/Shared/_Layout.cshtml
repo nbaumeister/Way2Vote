@@ -1,16 +1,15 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=8, IE=9, IE=edge" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title | Pool4You - Public Opinion Poll 4 You</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+<body style="background-image: url('/Theme/images/banner.jpg');">
+    <div class="navbar navbar-inverse navbar-fixed-top" style="background-color: white; opacity: 0.9; border: none; margin-bottom: 15px;">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -18,24 +17,23 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <img src="/Theme/images/p4y_logo.png"/>
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Umfragen","Index", "ZugaenglicheUmfragenAuswaehlen")</li>
+                <ul class="nav navbar-nav" style="padding-top: 10px; padding-left:-30px;">
+                    <li>@Html.ActionLink("Willkommen", "Index", "Home", null, new { @style = "color: black; font-weight: bold;", @onMouseOver = "this.style.color='grey'", @onMouseOut = "this.style.color='black'" })</li>
+                    <li>@Html.ActionLink("Öffentliche Umfragen", "Index", "ZugaenglicheUmfragenAuswaehlen", null, new { @style="color: black; font-weight: bold;", @onMouseOver="this.style.color='grey'", @onMouseOut="this.style.color='black'"})</li>
+                    <li>@Html.ActionLink("Umfrage Erstellen", "Erstellen", "UmfragenVerwalten", null, new { @style = "color: black; font-weight: bold;", @onMouseOver = "this.style.color='grey'", @onMouseOut = "this.style.color='black'" })</li>
                 </ul>
-                @Html.Partial("_LoginPartial")
+                <span style="padding-top: 10px;">@Html.Partial("_LoginPartial")</span>
             </div>
         </div>
     </div>
-    <div class="container body-content">
+    <div class="container body-content" style="background-color: white; opacity: 0.9; margin-top: 22px;">
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - Pool4You</p>
         </footer>
     </div>
 
@@ -44,3 +42,4 @@
     @RenderSection("scripts", required: false)
 </body>
 </html>
+ 

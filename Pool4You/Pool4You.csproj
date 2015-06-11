@@ -226,6 +226,9 @@
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Theme\images\banner.jpg" />
+    <Content Include="Theme\images\p4y_logo.png" />
+    <Content Include="Theme\images\section-image-1.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -262,10 +265,9 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\ZugaenglicheUmfragenAuswaehlen\Index.cshtml" />
     <Content Include="Views\ZugaenglicheUmfragenAuswaehlen\Teilnehmen.cshtml" />
+    <Content Include="Views\ZugaenglicheUmfragenAuswaehlen\View.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Votum.cshtml" />
     <Content Include="Views\UmfragenVerwalten\Erstellen.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\Frage.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\Antwort.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -296,7 +298,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>2417</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

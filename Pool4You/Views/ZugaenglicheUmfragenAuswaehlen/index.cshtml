@@ -1,14 +1,11 @@
 ﻿@model IEnumerable<Pool4You.Data.Umfrage>
 
 @{
-    ViewBag.Title = "ZugaenglicheUmfragenAuswaehlen";
+    ViewBag.Title = "Übersicht öffentlicher Umfragen";
 }
 
-<h2>ZugaenglicheUmfragenAuswaehlen</h2>
+<h2>Übersicht öffentlicher Umfragen</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -48,10 +45,10 @@
         </td>
         <td>
             @Html.ActionLink("Teilnehmen", "Teilnehmen", new { id = item.Id })
+             
             @Html.ActionLink("Löschen", "Loeschen", "UmfragenVerwalten", new { id = item.Id }, null)
         </td>
     </tr>
-    
 }
 
 </table>

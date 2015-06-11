@@ -1,31 +1,40 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Willkommen";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+<div class="row">
+    <div class="col-xs-12" style="margin-top: 20px;">
+        <h1>Pool4You - Public Opinion Poll For You!</h1>
+        <p class="lead">Erstelle, Verwalte und Teile dynamische Umfragen auf Knopfdruck!</p>
+    </div>
 </div>
 
-<div class="row">
+<div class="row" style="margin-top: 20px;">
     <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
+        <div class="imgAbt">
+            <img src="/Theme/images/section-image-1.png" />
+        </div>
+    </div>
+    <div class="col-md-8">
+        <p>Abstimmungen, Terminfindungen, Umfragen oder komplexe Meinungsforschung. Mit <b>Pool4You</b> ist all das nur einen Knopfdruck entfernt. Im Browser oder auf dem Handy - <b>Pool4You</b> ist immer verfügbar, wenn Du es benötigst. <br /><br />Mit den grafischen Auswertungsmöglichkeiten hast Du die aktuellen Ergebnisse immer im Blick und verlierst nie den Überblick. <br /><br /><b>Neugierig geworden?</b><br /><br /> Dann erstelle jetzt deinen <b>kostenlosen</b> Account!</p><br />
+        <p style="margin: 0px auto;">
+            @Html.ActionLink("Registrieren »", "Register", "Account", null, new { @class = "btn btn-primary btn-lg" })
+            @Html.ActionLink("Anmelden »", "Login", "Account", null, new { @class = "btn btn-primary btn-lg" })
         </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+    </div>
+</div>
+
+<div class="row" style="margin-top: 20px;">
+    <div class="col-md-4">
+        <h2>Abstimmungen</h2>
+        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Mehr erfahren &raquo;</a></p>
     </div>
     <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+        <h2>Terminfindungen</h2>
+        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Mehr erfahren &raquo;</a></p>
     </div>
     <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+        <h2>Dynamische Umfragen</h2>
+        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Mehr erfahren &raquo;</a></p>
     </div>
 </div>
