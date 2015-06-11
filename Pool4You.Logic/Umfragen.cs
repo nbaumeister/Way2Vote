@@ -107,6 +107,13 @@ namespace Pool4You.Logic
             Votum.Uhrzeit = DateTime.Now.TimeOfDay;
         }
 
+        public List<Umfrage> BeendeteUmfragen()
+        {
+            DateTime today = DateTime.Now.Date;
+
+            return UmfrageRepo.Get().Where(u => u.End_Termin < today).ToList();
+        }
+
         public Umfrage UmfrageErstellen()
         {
             var u = new Umfrage();
@@ -174,6 +181,11 @@ namespace Pool4You.Logic
                 _context.SaveChanges();
             }
 
+        }
+
+        public Umfrage UmfrageAnzeigen(int id)
+        {
+            return UmfrageRepo.GetByID(id);
         }
     }
 }
