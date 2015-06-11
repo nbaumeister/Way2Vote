@@ -22,6 +22,37 @@ namespace Pool4You.Controllers
 
         // GET: UmfragenVerwalten/Create
         [Authorize]
+        public ActionResult BeendeteUmfragen()
+        {
+
+            return View(umfrageLogic.BeendeteUmfragen());
+        }
+
+        [Authorize]
+        public ActionResult Anzeigen(int id)
+        {
+            try
+            {
+                var u = umfrageLogic.UmfrageAnzeigen(id);
+                if (u != null)
+                {
+                    return View(umfrageLogic.UmfrageAnzeigen(id));
+                }
+                else
+                {
+                    return RedirectToAction("BeendeteUmfragen");
+                }
+            }
+            catch(Exception e)
+            {
+                return RedirectToAction("BeendeteUmfragen");
+
+            }
+        }
+
+
+        // GET: UmfragenVerwalten/Create
+        [Authorize]
         public ActionResult Erstellen()
         {
             
