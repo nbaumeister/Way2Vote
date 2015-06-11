@@ -102,8 +102,8 @@ namespace Pool4You.Logic
 
             Votum.AntwortId = AntwortId;
             Votum.Antwort = AntwortRepo.GetByID(AntwortId);
-            
-            Votum.Datum = DateTime.Now; 
+
+            Votum.Datum = DateTime.Now;
             Votum.Uhrzeit = DateTime.Now.TimeOfDay;
         }
 
@@ -152,26 +152,28 @@ namespace Pool4You.Logic
             if (umfrage != null)
             {
                 int fragenLength = umfrage.Frage.Count;
-                for(int i = 0; i < fragenLength; i++)
+                List<Frage> fragen = umfrage.Frage.ToList();
+                for (int i = 0; i < fragenLength; i++)
                 {
-                    int antwortLength = umfrage.Frage.ElementAt(i).Antwort.Count;
-                    for (int y = 0; y < antwortLength; y++ )
+                    int antwortLength = fragen[i].Antwort.Count;
+                    List<Antwort> antworten = fragen[i].Antwort.ToList();
+                    for (int y = 0; y < antwortLength; y++)
                     {
-                        AntwortRepo.Delete(umfrage.Frage.ElementAt(i).Antwort.ElementAt(y));
+                        AntwortRepo.Delete(antworten[y]);
                     }
                 }
                 _context.SaveChanges();
 
                 for (int i = 0; i < fragenLength; i++)
                 {
-                    FrageRepo.Delete(umfrage.Frage.ElementAt(i));
+                    FrageRepo.Delete(fragen[i]);
                 }
                 _context.SaveChanges();
 
                 UmfrageRepo.Delete(umfrage);
                 _context.SaveChanges();
             }
-            
+
         }
     }
 }
