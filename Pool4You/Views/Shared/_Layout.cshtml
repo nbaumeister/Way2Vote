@@ -23,7 +23,7 @@
                 <ul class="nav navbar-nav" style="padding-top: 10px; padding-left:-30px;">
                     <li>@Html.ActionLink("Willkommen", "Index", "Home", null, new { @style = "color: black; font-weight: bold;", @onMouseOver = "this.style.color='grey'", @onMouseOut = "this.style.color='black'" })</li>
                     <li>@Html.ActionLink("Öffentliche Umfragen", "Index", "ZugaenglicheUmfragenAuswaehlen", null, new { @style="color: black; font-weight: bold;", @onMouseOver="this.style.color='grey'", @onMouseOut="this.style.color='black'"})</li>
-                    <li>@Html.ActionLink("Umfrage Erstellen", "Erstellen", "UmfragenVerwalten", null, new { @style = "color: black; font-weight: bold;", @onMouseOver = "this.style.color='grey'", @onMouseOut = "this.style.color='black'" })</li>
+                    <!----<li>@Html.ActionLink("Umfrage Erstellen", "Erstellen", "UmfragenVerwalten", null, new { @style = "color: black; font-weight: bold;", @onMouseOver = "this.style.color='grey'", @onMouseOut = "this.style.color='black'" })</li>-->
                     <li>@Html.ActionLink("Beendete Umfragen", "BeendeteUmfragen", "UmfragenVerwalten", null, new { @style = "color: black; font-weight: bold;", @onMouseOver = "this.style.color='grey'", @onMouseOut = "this.style.color='black'" })</li>
                 </ul>
                 <span style="padding-top: 10px;">@Html.Partial("_LoginPartial")</span>

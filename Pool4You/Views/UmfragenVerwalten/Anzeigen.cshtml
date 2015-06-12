@@ -1,9 +1,9 @@
 ﻿@model Pool4You.Data.Umfrage
 <h2>Umfrage Anzeigen</h2>
     <div>
-        <h4>Umfrage</h4>
+        <h4>@Html.DisplayFor(model => model.Title)</h4>
         <hr />
-        <dl class="dl-horizontal">
+        <dl>
             <dt>
                 @Html.DisplayNameFor(model => model.Title)
             </dt>
@@ -18,13 +18,14 @@
     
             <dd>
                 @Html.DisplayFor(model => model.Beschreibung)
-            </dd>
+            </dd><br />
+<br />
 
-            @Html.DisplayFor(model => model.Frage);
+            @Html.DisplayFor(model => model.Frage)
 
             </dl>
     </div>
+
     <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-        @Html.ActionLink("Back to List", "Index")
+        @Html.ActionLink("Zurück zur Übersicht beendeter Umfragen", "BeendeteUmfragen")
     </p>

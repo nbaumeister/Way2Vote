@@ -1,10 +1,10 @@
 ﻿@model Pool4You.Data.Umfrage
 
 @{
-    ViewBag.Title = "View";
+    ViewBag.Title = "Neue Umfrage erstellen";
 }
 
-<h2>View</h2>
+<h2>Neue Umfrage erstellen</h2>
 
 
 @using (Html.BeginForm()) 
@@ -21,7 +21,7 @@
                 @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div><br/><br/><br/>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Beschreibung, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -29,7 +29,7 @@
                 @Html.EditorFor(model => model.Beschreibung, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Beschreibung, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div><br/><br/>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Start_Termin, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -37,7 +37,7 @@
                 @Html.EditorFor(model => model.Start_Termin, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Start_Termin, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div><br/><br/>
 
         <div class="form-group">
             @Html.LabelFor(model => model.End_Termin, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -45,28 +45,35 @@
                 @Html.EditorFor(model => model.End_Termin, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.End_Termin, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div><br/><br/>
     
-        <ul>
-            @Html.EditorFor(m => m.Frage)
+    
+    <hr/>
+    
+        <ul style="list-style:none; margin:0px; padding-left:10px;">
+            @Html.EditorFor(m => m.Frage, "", new { @style = "list-stlye:none;" })
         </ul>
 
-        <div class="form-group">
+        <div class="form-group" style="margin: 0px; padding:-20px; float:left;">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Umfrage erstellen" class="btn btn-default" />
             </div>
-        </div>
-    
-
+        </div><br />
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    <br />
+    @Html.ActionLink("Zurück zur Umfragen-Übersicht", "../ZugaenglicheUmfragenAuswaehlen")
 </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 <script type="text/javascript">
+
+    $(document).ready(function () {
+        //$(document).find(".add").text("Option hinzufügen");
+        //$(document).find(".remove").text("Option entfernen");
+    });
 
     $(function () {
         registerEvents($(document));

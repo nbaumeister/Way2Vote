@@ -5,7 +5,7 @@
 <ul>
     @foreach (var option in Model.Antwort.Frage.Antwort.OrderBy(x => x.Id))
     {
-        <li>
+        <li style="list-style: none;">
             @Html.RadioButtonFor(v => v.AntwortId, option.Id, option.Id == Model.AntwortId ? new {Checked = "checked"}:null) <b>@(option.Antowrttext)</b> @(option.Kommentar)
         </li>
     }

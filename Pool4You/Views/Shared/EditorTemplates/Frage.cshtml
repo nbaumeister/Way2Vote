@@ -1,6 +1,6 @@
 ﻿@model Pool4You.Data.Frage
 
-<li>
+<li style="list-style:none;">
     <div class="form-group">
         @Html.HiddenFor(model => model.Id, new { @class = "id" })
         @Html.LabelFor(model => model.Fragetext, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -8,11 +8,14 @@
             @Html.EditorFor(model => model.Fragetext, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Fragetext, "", new { @class = "text-danger" })
         </div>
-        <button type="button" class="add" tex>add</button>
-        <button type="button" class="remove" value="remove">remove</button>
+        <br /><br />
+        <button type="button" class="add" >Frage hinzufügen</button>
+        <button type="button" class="remove" value="remove">Frage entfernen</button>
         <ul>
             @Html.EditorFor(model => model.Antwort, new { htmlAttributes = new { @class = "form-control" } })
         </ul>
 
     </div>
+
+    <hr/>
 </li>
