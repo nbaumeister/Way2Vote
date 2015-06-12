@@ -166,13 +166,17 @@ namespace Pool4You.Logic
                     List<Antwort> antworten = fragen[i].Antwort.ToList();
                     for (int y = 0; y < antwortLength; y++)
                     {
+                        int votaLength = antworten[y].Votum.Count;
+                        List<Votum> vota = antworten[y].Votum.ToList();
+                        for (int z = 0; z < votaLength; z++)
+                        {
+                            VotumRepo.Delete(vota[z]);
+                        }
+                        _context.SaveChanges();
+
                         AntwortRepo.Delete(antworten[y]);
                     }
-                }
-                _context.SaveChanges();
-
-                for (int i = 0; i < fragenLength; i++)
-                {
+                    _context.SaveChanges();
                     FrageRepo.Delete(fragen[i]);
                 }
                 _context.SaveChanges();
