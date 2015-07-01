@@ -177,6 +177,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\UmfragenVerwaltenController.cs" />
+    <Compile Include="Controllers\VotumVeraendernController.cs" />
     <Compile Include="Controllers\ZugaenglicheUmfragenAuswaehlenController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -263,8 +264,8 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\ZugaenglicheUmfragenAuswaehlen\Index.cshtml" />
-    <Content Include="Views\ZugaenglicheUmfragenAuswaehlen\Teilnehmen.cshtml" />
+    <Content Include="Views\ZugaenglicheUmfragenAuswaehlen\PraesentiereUmfragen.cshtml" />
+    <Content Include="Views\VotumVeraendern\PraesentiereUmfrage.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Votum.cshtml" />
     <Content Include="Views\UmfragenVerwalten\Erstellen.cshtml" />
     <Content Include="Views\UmfragenVerwalten\BeendeteUmfragen.cshtml" />

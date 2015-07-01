@@ -45,8 +45,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Umfragen.cs" />
+    <Compile Include="ZugaenglicheUmfragenAuswaehlenK.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VotumVeraendernK.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Pool4You.Data\Pool4You.Data.csproj">

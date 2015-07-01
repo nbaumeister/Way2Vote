@@ -44,8 +44,7 @@
             @Html.DisplayFor(modelItem => item.AspNetUsers.Email)
         </td>
         <td>
-            @Html.ActionLink("Teilnehmen", "Teilnehmen", new { id = item.Id })
-             
+            @Html.ActionLink("Teilnehmen", "PraesentiereUmfrage", "VotumVeraendern", new { id = item.Id }, null)
             @Html.ActionLink("Löschen", "Loeschen", "UmfragenVerwalten", new { id = item.Id }, null)
         </td>
     </tr>

@@ -12,12 +12,12 @@ namespace Pool4You.Controllers
     public class UmfragenVerwaltenController : Controller
     {
 
-        UmfragenLogic umfrageLogic;
+        ZugaenglicheUmfragenAuswaehlenK zugaenglicheUmfragenAuswaehlenK;
 
         public UmfragenVerwaltenController()
         {
             Entities context = new Entities();
-            umfrageLogic = new UmfragenLogic(context);
+            zugaenglicheUmfragenAuswaehlenK = new ZugaenglicheUmfragenAuswaehlenK(context);
         }
 
         // GET: UmfragenVerwalten/Create
@@ -25,7 +25,7 @@ namespace Pool4You.Controllers
         public ActionResult BeendeteUmfragen()
         {
 
-            return View(umfrageLogic.BeendeteUmfragen());
+            return View(zugaenglicheUmfragenAuswaehlenK.BeendeteUmfragen());
         }
 
         [Authorize]
@@ -33,10 +33,10 @@ namespace Pool4You.Controllers
         {
             try
             {
-                var u = umfrageLogic.UmfrageAnzeigen(id);
+                var u = zugaenglicheUmfragenAuswaehlenK.UmfrageAnzeigen(id);
                 if (u != null)
                 {
-                    return View(umfrageLogic.UmfrageAnzeigen(id));
+                    return View(zugaenglicheUmfragenAuswaehlenK.UmfrageAnzeigen(id));
                 }
                 else
                 {
@@ -56,7 +56,7 @@ namespace Pool4You.Controllers
         public ActionResult Erstellen()
         {
             
-            return View(umfrageLogic.UmfrageErstellen());
+            return View(zugaenglicheUmfragenAuswaehlenK.UmfrageErstellen());
         }
 
         // POST: UmfragenVerwalten/Create
@@ -67,7 +67,7 @@ namespace Pool4You.Controllers
             try
             {
                 string userId = User.Identity.GetUserId();
-                umfrageLogic.UmfrageErstellen(u, userId);
+                zugaenglicheUmfragenAuswaehlenK.UmfrageErstellen(u, userId);
 
                 return RedirectToAction("Index", "ZugaenglicheUmfragenAuswaehlen");
             }
@@ -82,7 +82,7 @@ namespace Pool4You.Controllers
         {
             try
             {
-                umfrageLogic.UmfrageLoeschen(id);
+                zugaenglicheUmfragenAuswaehlenK.UmfrageLoeschen(id);
                 return RedirectToAction("Index", "ZugaenglicheUmfragenAuswaehlen");
             }
             catch

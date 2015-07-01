@@ -7,7 +7,7 @@ using Pool4You.Data;
 
 namespace Pool4You.Logic
 {
-    public class UmfragenLogic
+    public class ZugaenglicheUmfragenAuswaehlenK
     {
         Entities _context;
 
@@ -19,7 +19,7 @@ namespace Pool4You.Logic
         public static GenericRepository<Antwort> AntwortRepo;
         public static GenericRepository<Frage> FrageRepo;
 
-        public UmfragenLogic(Entities context)
+        public ZugaenglicheUmfragenAuswaehlenK(Entities context)
         {
             _context = context;
 
@@ -30,81 +30,11 @@ namespace Pool4You.Logic
             FrageRepo = new GenericRepository<Frage>(context);
         }
 
-        public List<Umfrage> ZugaenglicheUmfragenAuswaehlen(string UserId)
+        public List<Umfrage> GibUmfragen(string UserId)
         {
             DateTime today = DateTime.Now.Date;
 
             return UmfrageRepo.Get().Where(u => u.End_Termin >= today && u.Start_Termin <= today).ToList();
-        }
-
-        public List<Votum> VotumVeraendern(string UserId, int UmfrageId)
-        {
-            Umfrage umfrage = UmfrageRepo.GetByID(UmfrageId);
-
-            List<Votum> vota = new List<Votum>();
-
-            foreach (Frage f in umfrage.Frage)
-            {
-                Votum votum = VotumRepo.Get().FirstOrDefault(v => v.Antwort.Frage.Equals(f) && v.AspNetUsersId == UserId);
-
-                if (votum == null)
-                {
-                    votum = new Votum();
-                    votum.Antwort = f.Antwort.FirstOrDefault();
-                    votum.AntwortId = f.Antwort.FirstOrDefault().Id;
-
-                    votum.AspNetUsers = UserRepo.GetByID(UserId);
-                    votum.AspNetUsersId = UserId;
-                }
-
-                vota.Add(votum);
-            }
-
-            return vota;
-        }
-
-        public bool VotumVeraendern(string UserId, int UmfrageId, IList<Votum> vota)
-        {
-            if (UserId != null && vota != null)
-            {
-                foreach (var votum in vota)
-                {
-                    if (votum.Id == 0)
-                    {
-                        VotumValuesSetzen(UserId, votum, votum.AntwortId);
-
-                        VotumRepo.Insert(votum);
-                    }
-                    else
-                    {
-                        var existingVotum = VotumRepo.GetByID(votum.Id);
-
-                        VotumValuesSetzen(UserId, existingVotum, votum.AntwortId);
-
-                        VotumRepo.Update(existingVotum);
-                    }
-                }
-
-                _context.SaveChanges();
-
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        private static void VotumValuesSetzen(string UserId, Votum Votum, int AntwortId)
-        {
-            Votum.AspNetUsersId = UserId;
-            Votum.AspNetUsers = UserRepo.GetByID(UserId);
-
-            Votum.AntwortId = AntwortId;
-            Votum.Antwort = AntwortRepo.GetByID(AntwortId);
-
-            Votum.Datum = DateTime.Now;
-            Votum.Uhrzeit = DateTime.Now.TimeOfDay;
         }
 
         public List<Umfrage> BeendeteUmfragen()
