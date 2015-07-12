@@ -69,7 +69,7 @@ namespace Pool4You.Controllers
                 string userId = User.Identity.GetUserId();
                 zugaenglicheUmfragenAuswaehlenK.UmfrageErstellen(u, userId);
 
-                return RedirectToAction("Index", "ZugaenglicheUmfragenAuswaehlen");
+                return RedirectToAction("PraesentiereUmfragen", "ZugaenglicheUmfragenAuswaehlen");
             }
             catch
             {
@@ -83,11 +83,11 @@ namespace Pool4You.Controllers
             try
             {
                 zugaenglicheUmfragenAuswaehlenK.UmfrageLoeschen(id);
-                return RedirectToAction("Index", "ZugaenglicheUmfragenAuswaehlen");
+                return RedirectToAction("PraesentiereUmfragen", "ZugaenglicheUmfragenAuswaehlen");
             }
             catch
             {
-                return RedirectToAction("Index", "ZugaenglicheUmfragenAuswaehlen");
+                return RedirectToAction("PraesentiereUmfragen", "ZugaenglicheUmfragenAuswaehlen");
             }
         }
     }

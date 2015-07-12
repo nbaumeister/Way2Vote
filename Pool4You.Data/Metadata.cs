@@ -34,4 +34,20 @@ namespace Pool4You.Data
         [Display(Name = "Fragen")]
         public ICollection<Frage> Frage;
     }
+
+    public partial class AntwortMetadata
+    {
+
+        [Display(Name = "Id")]
+        public int Id;
+
+        [Display(Name = "Antworttext")]
+        public string Antowrttext;
+
+        [Display(Name = "Kommentar")]
+        public string Kommentar;
+
+        [Display(Name = "Frage")]
+        public int FrageId;
+    }
 }
